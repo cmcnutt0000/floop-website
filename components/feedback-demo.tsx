@@ -3,15 +3,18 @@
 import type React from "react";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 interface FeedbackItem {
   id: string;
   text: string;
   color: string;
   category: string;
+  icon?: string;
 }
 
 interface PlacedFeedback {
@@ -30,128 +33,148 @@ interface VideoFeedback {
   y: number;
 }
 
-const essayFeedbackBank: FeedbackItem[] = [
-  {
-    id: "e1",
-    text: "Great thesis statement!",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "e2",
-    text: "Add more evidence here",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-  {
-    id: "e3",
-    text: "Check your grammar",
-    color: "bg-rose-500",
-    category: "Correction",
-  },
-  {
-    id: "e4",
-    text: "Strong argument!",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "e5",
-    text: "Expand this idea",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-];
-
-const imageFeedbackBank: FeedbackItem[] = [
-  {
-    id: "i1",
-    text: "Beautiful color choice!",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "i2",
-    text: "Add more contrast here",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-  {
-    id: "i3",
-    text: "Watch your proportions",
-    color: "bg-rose-500",
-    category: "Correction",
-  },
-  {
-    id: "i4",
-    text: "Great use of negative space",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "i5",
-    text: "Try blending these edges",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-];
-
-const videoFeedbackBank: FeedbackItem[] = [
-  {
-    id: "v1",
-    text: "Great delivery here!",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "v2",
-    text: "Slow down this section",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-  {
-    id: "v3",
-    text: "Make eye contact",
-    color: "bg-rose-500",
-    category: "Correction",
-  },
-  {
-    id: "v4",
-    text: "Excellent pacing!",
-    color: "bg-emerald-500",
-    category: "Praise",
-  },
-  {
-    id: "v5",
-    text: "Add a visual aid here",
-    color: "bg-amber-500",
-    category: "Suggestion",
-  },
-];
-
-const colorOptions = [
-  {
-    id: "green",
-    color: "bg-emerald-500",
-    label: "Praise",
-    ring: "ring-emerald-500",
-  },
-  {
-    id: "yellow",
-    color: "bg-amber-500",
-    label: "Suggestion",
-    ring: "ring-amber-500",
-  },
-  {
-    id: "red",
-    color: "bg-rose-500",
-    label: "Correction",
-    ring: "ring-rose-500",
-  },
-];
-
 export function FeedbackDemo() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState("essay");
+
+  // Translated feedback banks
+  const essayFeedbackBank: FeedbackItem[] = [
+    {
+      id: "e1",
+      text: t.feedbackDemo.greatThesis,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "e2",
+      text: t.feedbackDemo.addMoreEvidence,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+    {
+      id: "e3",
+      text: t.feedbackDemo.checkGrammar,
+      color: "bg-purple-500",
+      category: t.feedbackDemo.correction,
+      icon: "/images/Confused.svg",
+    },
+    {
+      id: "e4",
+      text: t.feedbackDemo.strongArgument,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "e5",
+      text: t.feedbackDemo.expandIdea,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+  ];
+
+  const imageFeedbackBank: FeedbackItem[] = [
+    {
+      id: "i1",
+      text: t.feedbackDemo.beautifulColor,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "i2",
+      text: t.feedbackDemo.addContrast,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+    {
+      id: "i3",
+      text: t.feedbackDemo.watchProportions,
+      color: "bg-purple-500",
+      category: t.feedbackDemo.correction,
+      icon: "/images/Confused.svg",
+    },
+    {
+      id: "i4",
+      text: t.feedbackDemo.greatNegativeSpace,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "i5",
+      text: t.feedbackDemo.tryBlending,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+  ];
+
+  const videoFeedbackBank: FeedbackItem[] = [
+    {
+      id: "v1",
+      text: t.feedbackDemo.greatDelivery,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "v2",
+      text: t.feedbackDemo.slowDown,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+    {
+      id: "v3",
+      text: t.feedbackDemo.stabilizeCamera,
+      color: "bg-purple-500",
+      category: t.feedbackDemo.correction,
+      icon: "/images/Confused.svg",
+    },
+    {
+      id: "v4",
+      text: t.feedbackDemo.excellentPacing,
+      color: "bg-emerald-500",
+      category: t.feedbackDemo.praise,
+      icon: "/images/great.svg",
+    },
+    {
+      id: "v5",
+      text: t.feedbackDemo.addVisualAid,
+      color: "bg-amber-500",
+      category: t.feedbackDemo.suggestion,
+      icon: "/images/NeedsImprovement.svg",
+    },
+  ];
+
+  const colorOptions = [
+    {
+      id: "green",
+      color: "bg-emerald-500",
+      label: t.feedbackDemo.praise,
+      ring: "ring-emerald-500",
+      icon: "/images/great.svg",
+    },
+    {
+      id: "yellow",
+      color: "bg-amber-500",
+      label: t.feedbackDemo.suggestion,
+      ring: "ring-amber-500",
+      icon: "/images/NeedsImprovement.svg",
+    },
+    {
+      id: "purple",
+      color: "bg-purple-500",
+      label: t.feedbackDemo.correction,
+      ring: "ring-purple-500",
+      icon: "/images/Confused.svg",
+    },
+  ];
 
   // Essay state
   const [essayFeedback, setEssayFeedback] = useState<PlacedFeedback[]>([]);
@@ -478,10 +501,9 @@ export function FeedbackDemo() {
       {/* Try it yourself - above tabs */}
       <div className="mb-4 p-4 bg-purple-100 border border-accent/20 rounded-xl">
         <p className="text-sm text-foreground">
-          <span className="font-semibold">Try it yourself:</span>{" "}
+          <span className="font-semibold">{t.feedbackDemo.tryItYourself}</span>{" "}
           <span className="text-muted-foreground">
-            Drag comments onto student work and see how Floop makes feedback 4x
-            faster.
+            {t.feedbackDemo.tryItDescription}
           </span>
         </p>
       </div>
@@ -504,7 +526,7 @@ export function FeedbackDemo() {
                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              Essay
+              {t.feedbackDemo.essay}
             </TabsTrigger>
             <TabsTrigger value="image" className="px-6">
               <svg
@@ -520,7 +542,7 @@ export function FeedbackDemo() {
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              Image
+              {t.feedbackDemo.image}
             </TabsTrigger>
             <TabsTrigger value="video" className="px-6">
               <svg
@@ -536,7 +558,7 @@ export function FeedbackDemo() {
                   d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
                 />
               </svg>
-              Video
+              {t.feedbackDemo.video}
             </TabsTrigger>
           </TabsList>
 
@@ -556,39 +578,17 @@ export function FeedbackDemo() {
             >
               <div className="select-none pointer-events-none">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  The Power of Meaningful Feedback in Education
+                  {t.feedbackDemo.essayTitle}
                 </h3>
                 <p className="text-sm text-gray-400 mb-6">
-                  By: Jamie Rodriguez | Period 3
+                  {t.feedbackDemo.essayAuthor}
                 </p>
 
                 <div className="space-y-4 text-gray-700 text-[15px] leading-relaxed">
-                  <p>
-                    Feedback is the cornerstone of effective learning. When
-                    teachers provide thoughtful, specific feedback, students
-                    gain a clearer understanding of their strengths and areas
-                    for growth. Research shows that quality feedback can improve
-                    student achievement by up to 30%.
-                  </p>
-                  <p>
-                    The most impactful feedback is timely and actionable.
-                    Students benefit most when they receive comments while the
-                    material is still fresh in their minds. This allows them to
-                    immediately apply suggestions and see the connection between
-                    effort and improvement.
-                  </p>
-                  <p>
-                    Great feedback goes beyond simple corrections. It celebrates
-                    what students do well, asks probing questions that encourage
-                    deeper thinking, and provides clear next steps for
-                    improvement. This balanced approach builds confidence while
-                    challenging students to reach higher.
-                  </p>
-                  <p>
-                    In conclusion, investing time in meaningful feedback
-                    transforms the learning experience and helps every student
-                    realize their full potential.
-                  </p>
+                  <p>{t.feedbackDemo.essayParagraph1}</p>
+                  <p>{t.feedbackDemo.essayParagraph2}</p>
+                  <p>{t.feedbackDemo.essayParagraph3}</p>
+                  <p>{t.feedbackDemo.essayParagraph4}</p>
                 </div>
               </div>
 
@@ -604,7 +604,7 @@ export function FeedbackDemo() {
               {isDraggingOver && (
                 <div className="absolute inset-0 flex items-center justify-center bg-accent/5 rounded-lg pointer-events-none">
                   <div className="bg-accent text-accent-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg">
-                    Drop feedback here
+                    {t.feedbackDemo.dropFeedbackHere}
                   </div>
                 </div>
               )}
@@ -612,7 +612,7 @@ export function FeedbackDemo() {
               {essayFeedback.length === 0 && !isDraggingOver && (
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
                   <p className="text-muted-foreground text-sm bg-secondary/80 px-4 py-2 rounded-full">
-                    Drag feedback from the right panel onto the document
+                    {t.feedbackDemo.dragFeedbackFromRight}
                   </p>
                 </div>
               )}
@@ -633,41 +633,14 @@ export function FeedbackDemo() {
               onDrop={handleImageDrop}
               onClick={() => setSelectedImageId(null)}
             >
-              {/* Simulated student artwork */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center select-none pointer-events-none">
-                    <div className="w-64 h-64 mx-auto mb-4 relative">
-                      {/* Abstract art simulation */}
-                      <div
-                        className="absolute inset-0 rounded-full bg-gradient-to-tr from-yellow-300 to-orange-400 opacity-80"
-                        style={{
-                          transform: "translate(-20%, -10%) scale(0.6)",
-                        }}
-                      />
-                      <div
-                        className="absolute inset-0 rounded-full bg-gradient-to-bl from-blue-400 to-cyan-300 opacity-70"
-                        style={{ transform: "translate(20%, 10%) scale(0.5)" }}
-                      />
-                      <div
-                        className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400 to-rose-300 opacity-60"
-                        style={{ transform: "translate(0%, 30%) scale(0.4)" }}
-                      />
-                      <div
-                        className="absolute inset-0 rounded-full bg-gradient-to-t from-green-300 to-emerald-400 opacity-50"
-                        style={{
-                          transform: "translate(-30%, 20%) scale(0.35)",
-                        }}
-                      />
-                    </div>
-                    <p className="text-gray-600 font-medium text-lg">
-                      Student Artwork
-                    </p>
-                    <p className="text-gray-400 text-sm">
-                      By: Alex Chen | Art 101
-                    </p>
-                  </div>
-                </div>
+              {/* Student artwork image */}
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/feedbackimagetop.png"
+                  alt="Student Artwork"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {imageFeedback.map((placed) =>
@@ -682,7 +655,7 @@ export function FeedbackDemo() {
               {isDraggingOver && (
                 <div className="absolute inset-0 flex items-center justify-center bg-accent/5 rounded-lg pointer-events-none">
                   <div className="bg-accent text-accent-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg">
-                    Drop feedback here
+                    {t.feedbackDemo.dropFeedbackHere}
                   </div>
                 </div>
               )}
@@ -690,7 +663,7 @@ export function FeedbackDemo() {
               {imageFeedback.length === 0 && !isDraggingOver && (
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
                   <p className="text-muted-foreground text-sm bg-white/80 px-4 py-2 rounded-full">
-                    Drag feedback from the right panel onto the image
+                    {t.feedbackDemo.dragFeedbackOntoImage}
                   </p>
                 </div>
               )}
@@ -731,7 +704,7 @@ export function FeedbackDemo() {
                         {String(currentTime + 1).padStart(2, "0")}
                       </div>
                       <p className="text-white/60 text-sm">
-                        Student Presentation
+                        {t.feedbackDemo.studentPresentation}
                       </p>
                     </div>
                   </div>
@@ -755,7 +728,7 @@ export function FeedbackDemo() {
                 {isDraggingOver && (
                   <div className="absolute inset-0 flex items-center justify-center bg-accent/10 rounded-lg pointer-events-none">
                     <div className="bg-accent text-accent-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg">
-                      Drop feedback at {currentTime}s
+                      {t.feedbackDemo.dropFeedbackAt} {currentTime}s
                     </div>
                   </div>
                 )}
@@ -763,7 +736,7 @@ export function FeedbackDemo() {
                 {videoFeedback.length === 0 && !isDraggingOver && (
                   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
                     <p className="text-white/60 text-sm bg-black/30 px-4 py-2 rounded-full">
-                      Drag feedback onto the video at any timestamp
+                      {t.feedbackDemo.dragFeedbackOntoVideo}
                     </p>
                   </div>
                 )}
@@ -775,7 +748,7 @@ export function FeedbackDemo() {
                   <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <span>0:00</span>
                     <span className="font-medium text-foreground">
-                      Timeline
+                      {t.feedbackDemo.timeline}
                     </span>
                     <span>0:24</span>
                   </div>
@@ -819,11 +792,13 @@ export function FeedbackDemo() {
 
                   {/* Feedback count at current timestamp */}
                   <div className="text-center text-xs text-muted-foreground">
-                    {getVisibleVideoFeedback().length} comment
-                    {getVisibleVideoFeedback().length !== 1 ? "s" : ""} at this
-                    timestamp
+                    {getVisibleVideoFeedback().length}{" "}
+                    {getVisibleVideoFeedback().length !== 1
+                      ? t.feedbackDemo.commentsAtTimestampPlural
+                      : t.feedbackDemo.commentsAtTimestamp}{" "}
+                    {t.feedbackDemo.atThisTimestamp}
                     {videoFeedback.length > 0 &&
-                      ` • ${videoFeedback.length} total`}
+                      ` • ${videoFeedback.length} ${t.feedbackDemo.total}`}
                   </div>
                 </div>
               </Card>
@@ -835,18 +810,20 @@ export function FeedbackDemo() {
         <div className="space-y-4">
           <div>
             <div className="flex items-center justify-between">
-              <h4 className="font-bold text-foreground">Comment Bank</h4>
+              <h4 className="font-bold text-foreground">
+                {t.feedbackDemo.commentBank}
+              </h4>
               {getCurrentFeedbackCount() > 0 && (
                 <button
                   onClick={resetDemo}
                   className="text-xs text-muted-foreground hover:text-accent transition-colors"
                 >
-                  Reset demo
+                  {t.feedbackDemo.resetDemo}
                 </button>
               )}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              Save feedback you use often for quick reuse across students
+              {t.feedbackDemo.commentBankDesc}
             </p>
           </div>
 
@@ -861,9 +838,17 @@ export function FeedbackDemo() {
                   draggingId === feedback.id ? "opacity-50 scale-95" : ""
                 }`}
               >
-                <div
-                  className={`w-3 h-3 rounded-full ${feedback.color} flex-shrink-0`}
-                />
+                {feedback.icon ? (
+                  <img
+                    src={feedback.icon}
+                    alt={feedback.category}
+                    className="w-8 h-8 flex-shrink-0 object-contain"
+                  />
+                ) : (
+                  <div
+                    className={`w-3 h-3 rounded-full ${feedback.color} flex-shrink-0`}
+                  />
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">
                     {feedback.text}
@@ -890,7 +875,9 @@ export function FeedbackDemo() {
           </div>
 
           <div className="pt-4 border-t border-border">
-            <h4 className="font-bold text-foreground mb-3">Write Your Own</h4>
+            <h4 className="font-bold text-foreground mb-3">
+              {t.feedbackDemo.writeYourOwn}
+            </h4>
 
             {/* Color selector */}
             <div className="flex gap-2 mb-3">
@@ -898,13 +885,21 @@ export function FeedbackDemo() {
                 <button
                   key={option.id}
                   onClick={() => setSelectedColor(option.id)}
-                  className={`flex-1 flex flex-col items-center gap-1.5 p-2 rounded-lg border-2 transition-all ${
+                  className={`flex-1 flex flex-col items-center gap-1.5 p-2 rounded-lg border-2 transition-all cursor-pointer ${
                     selectedColor === option.id
                       ? `border-transparent ring-2 ${option.ring} bg-white`
                       : "border-border hover:border-muted-foreground/30 bg-gray-100"
                   }`}
                 >
-                  <div className={`w-5 h-5 rounded-full ${option.color}`} />
+                  {option.icon ? (
+                    <img
+                      src={option.icon}
+                      alt={option.label}
+                      className="w-8 h-8 object-contain"
+                    />
+                  ) : (
+                    <div className={`w-5 h-5 rounded-full ${option.color}`} />
+                  )}
                   <span className="text-[10px] font-medium text-muted-foreground">
                     {option.label}
                   </span>
@@ -915,7 +910,7 @@ export function FeedbackDemo() {
             {/* Comment input */}
             <Input
               type="text"
-              placeholder="Type your feedback..."
+              placeholder={t.feedbackDemo.typeFeedback}
               value={customComment}
               onChange={(e) => setCustomComment(e.target.value)}
               className="mb-3 text-sm bg-white"
@@ -931,9 +926,17 @@ export function FeedbackDemo() {
                   draggingId === "custom" ? "opacity-50 scale-95" : ""
                 }`}
               >
-                <div
-                  className={`w-3 h-3 rounded-full ${getSelectedColorOption().color} flex-shrink-0`}
-                />
+                {getSelectedColorOption().icon ? (
+                  <img
+                    src={getSelectedColorOption().icon}
+                    alt={getSelectedColorOption().label}
+                    className="w-8 h-8 flex-shrink-0 object-contain"
+                  />
+                ) : (
+                  <div
+                    className={`w-3 h-3 rounded-full ${getSelectedColorOption().color} flex-shrink-0`}
+                  />
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">
                     {customComment}
@@ -947,15 +950,18 @@ export function FeedbackDemo() {
 
             {!customComment.trim() && (
               <p className="text-xs text-muted-foreground text-center py-2">
-                Type a comment above to create (and place) feedback
+                {t.feedbackDemo.typeCommentAbove}
               </p>
             )}
           </div>
 
           <div className="text-center pt-4">
             <p className="text-xs text-muted-foreground mb-2">
-              {getCurrentFeedbackCount()} comment
-              {getCurrentFeedbackCount() !== 1 ? "s" : ""} placed
+              {getCurrentFeedbackCount()}{" "}
+              {getCurrentFeedbackCount() !== 1
+                ? t.feedbackDemo.commentsPlacedPlural
+                : t.feedbackDemo.commentsPlaced}{" "}
+              {t.feedbackDemo.placed}
             </p>
             <div className="flex gap-1 justify-center mb-3">
               {[...Array(5)].map((_, i) => (
@@ -968,8 +974,7 @@ export function FeedbackDemo() {
               ))}
             </div>
             <p className="text-[10px] text-muted-foreground/70 leading-relaxed">
-              This is just a demonstration. To see all that Floop can do, create
-              a free account today.
+              {t.feedbackDemo.demoDisclaimer}
             </p>
           </div>
         </div>

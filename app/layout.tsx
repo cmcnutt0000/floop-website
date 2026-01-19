@@ -2,6 +2,8 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { AccessibilityProvider } from "@/components/accessibility-provider";
+import { LanguageProvider } from "@/lib/i18n/language-context";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -50,8 +52,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.cdnfonts.com/css/open-dyslexic"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`${openSans.variable} font-sans antialiased`}>
-        {children}
+        <LanguageProvider>
+          <AccessibilityProvider>{children}</AccessibilityProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

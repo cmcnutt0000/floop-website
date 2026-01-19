@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function SelfAssessmentDemo() {
+  const { t } = useLanguage();
   const [response, setResponse] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -13,34 +15,36 @@ export function SelfAssessmentDemo() {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/50 p-3 overflow-hidden relative">
+    <div className="w-full h-full bg-gradient-to-br from-secondary to-secondary/50 p-4 overflow-hidden relative">
       {/* Background: Student Project (blurred/dimmed) */}
-      <div className="absolute inset-3 bg-white rounded-lg shadow-sm border border-gray-200 opacity-40">
-        <div className="p-3">
-          <div className="text-[9px] font-bold text-gray-700 mb-1">
-            Science Project
+      <div className="absolute inset-4 bg-white rounded-lg shadow-sm border border-gray-200 opacity-40">
+        <div className="p-4">
+          <div className="text-sm font-bold text-gray-700 mb-1">
+            {t.selfAssessmentDemo.scienceProject}
           </div>
-          <div className="text-[8px] text-gray-500 mb-2">The Water Cycle</div>
+          <div className="text-xs text-gray-500 mb-3">
+            {t.selfAssessmentDemo.waterCycle}
+          </div>
           <div className="space-y-2">
-            <div className="h-2 bg-gray-200 rounded w-full" />
-            <div className="h-2 bg-gray-200 rounded w-4/5" />
-            <div className="h-2 bg-gray-200 rounded w-full" />
-            <div className="h-8 bg-gray-100 rounded mt-2" />
-            <div className="h-2 bg-gray-200 rounded w-3/4" />
-            <div className="h-2 bg-gray-200 rounded w-full" />
+            <div className="h-2.5 bg-gray-200 rounded w-full" />
+            <div className="h-2.5 bg-gray-200 rounded w-4/5" />
+            <div className="h-2.5 bg-gray-200 rounded w-full" />
+            <div className="h-10 bg-gray-100 rounded mt-3" />
+            <div className="h-2.5 bg-gray-200 rounded w-3/4" />
+            <div className="h-2.5 bg-gray-200 rounded w-full" />
           </div>
         </div>
       </div>
 
       {/* Modal Overlay */}
-      <div className="absolute inset-3 flex items-center justify-center">
-        <div className="bg-white rounded-xl shadow-xl border border-gray-200 w-[95%] max-w-[280px] overflow-hidden">
+      <div className="absolute inset-4 flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-xl border border-gray-200 w-[95%] max-w-[320px] overflow-hidden">
           {/* Modal Header */}
-          <div className="bg-accent/10 px-3 py-2 border-b border-accent/20">
+          <div className="bg-accent/10 px-4 py-3 border-b border-accent/20">
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-full bg-accent flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center">
                 <svg
-                  className="w-3 h-3 text-white"
+                  className="w-4 h-4 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -53,42 +57,41 @@ export function SelfAssessmentDemo() {
                   />
                 </svg>
               </div>
-              <span className="text-xs font-semibold text-accent">
-                Self-Reflection
+              <span className="text-sm font-semibold text-accent">
+                {t.selfAssessmentDemo.selfReflection}
               </span>
             </div>
           </div>
 
           {/* Modal Content */}
-          <div className="p-3">
+          <div className="p-4">
             {!submitted ? (
               <>
-                <p className="text-[9px] text-gray-700 font-medium mb-2">
-                  Before submitting, reflect on your work:
+                <p className="text-sm text-gray-700 font-medium mb-2">
+                  {t.selfAssessmentDemo.beforeSubmitting}
                 </p>
-                <p className="text-[8px] text-gray-600 mb-3 leading-relaxed">
-                  How do you feel about your assignment? Where would you like
-                  feedback from your teacher?
+                <p className="text-xs text-gray-600 mb-3 leading-relaxed">
+                  {t.selfAssessmentDemo.howDoYouFeel}
                 </p>
                 <textarea
                   value={response}
                   onChange={(e) => setResponse(e.target.value)}
-                  placeholder="I feel confident about my introduction, but I'd like feedback on my conclusion..."
-                  className="w-full text-[8px] px-2 py-1.5 rounded border border-gray-200 bg-gray-50 focus:outline-none focus:border-accent focus:bg-white resize-none h-16"
+                  placeholder={t.selfAssessmentDemo.placeholder}
+                  className="w-full text-xs px-3 py-2 rounded border border-gray-200 bg-gray-50 focus:outline-none focus:border-accent focus:bg-white resize-none h-20"
                 />
                 <button
                   onClick={handleSubmit}
                   disabled={!response.trim()}
-                  className="w-full mt-2 text-[8px] px-3 py-1.5 bg-accent text-white rounded font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent/90 transition-colors"
+                  className="w-full mt-3 text-xs px-4 py-2 bg-accent text-white rounded font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-accent/90 transition-colors"
                 >
-                  Submit Reflection
+                  {t.selfAssessmentDemo.submitReflection}
                 </button>
               </>
             ) : (
-              <div className="text-center py-2">
-                <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-2">
+              <div className="text-center py-4">
+                <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-3">
                   <svg
-                    className="w-5 h-5 text-emerald-500"
+                    className="w-6 h-6 text-emerald-500"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -101,11 +104,11 @@ export function SelfAssessmentDemo() {
                     />
                   </svg>
                 </div>
-                <p className="text-[9px] font-medium text-gray-700 mb-1">
-                  Reflection Submitted!
+                <p className="text-sm font-medium text-gray-700 mb-1">
+                  {t.selfAssessmentDemo.reflectionSubmitted}
                 </p>
-                <p className="text-[8px] text-gray-500">
-                  Your teacher will see your thoughts.
+                <p className="text-xs text-gray-500">
+                  {t.selfAssessmentDemo.teacherWillSee}
                 </p>
               </div>
             )}

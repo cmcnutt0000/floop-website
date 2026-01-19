@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function PeerReviewDemo() {
+  const { t } = useLanguage();
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [animating, setAnimating] = useState(false);
   const [givenFeedback, setGivenFeedback] = useState<string[]>([]);
@@ -29,8 +31,8 @@ export function PeerReviewDemo() {
         return "bg-emerald-500";
       case "amber":
         return "bg-amber-500";
-      case "rose":
-        return "bg-rose-500";
+      case "purple":
+        return "bg-purple-500";
       default:
         return "bg-gray-400";
     }
@@ -38,66 +40,81 @@ export function PeerReviewDemo() {
 
   const students = [
     {
-      name: "Alex M.",
+      name: "Alex",
       received: ["emerald", "amber"],
       given: ["emerald", "amber"],
     },
-    { name: "Jordan", received: [], given: ["emerald"], isJordan: true }, // Jordan receives user's feedback
+    { name: "Jayden", received: ["emerald"], given: ["amber"] },
+    {
+      name: "Liu",
+      received: ["amber", "purple"],
+      given: ["emerald", "purple"],
+    },
+    { name: "Jordan", received: [], given: ["emerald"], isJordan: true },
     { name: "You", received: ["emerald"], given: [], isUser: true },
-    { name: "Sam T.", received: ["amber", "rose"], given: ["emerald"] },
+    { name: "Aisha", received: ["emerald", "amber"], given: ["amber"] },
+    { name: "Sam", received: ["amber", "purple"], given: ["emerald"] },
   ];
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 p-3 overflow-hidden flex flex-col">
+    <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/5 p-4 overflow-hidden flex flex-col">
       {/* Student Action Area */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-2 mb-2">
-        <p className="text-[8px] font-semibold text-gray-600 mb-1.5">
-          Leave feedback for Jordan's essay:
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-3 mb-3">
+        <p className="text-xs font-semibold text-gray-600 mb-2">
+          {t.peerReviewDemo.leaveFeedbackFor}
         </p>
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleColorClick("emerald")}
             disabled={animating || givenFeedback.length >= 3}
-            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <div className="w-3 h-3 rounded-full bg-emerald-500" />
-            <span className="text-[7px] text-gray-600">Praise</span>
+            <div className="w-3.5 h-3.5 rounded-full bg-emerald-500" />
+            <span className="text-xs text-gray-600">
+              {t.peerReviewDemo.praise}
+            </span>
           </button>
           <button
             onClick={() => handleColorClick("amber")}
             disabled={animating || givenFeedback.length >= 3}
-            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <div className="w-3 h-3 rounded-full bg-amber-500" />
-            <span className="text-[7px] text-gray-600">Suggestion</span>
+            <div className="w-3.5 h-3.5 rounded-full bg-amber-500" />
+            <span className="text-xs text-gray-600">
+              {t.peerReviewDemo.suggestion}
+            </span>
           </button>
           <button
-            onClick={() => handleColorClick("rose")}
+            onClick={() => handleColorClick("purple")}
             disabled={animating || givenFeedback.length >= 3}
-            className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded border border-gray-200 hover:border-rose-300 hover:bg-rose-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <div className="w-3 h-3 rounded-full bg-rose-500" />
-            <span className="text-[7px] text-gray-600">Correction</span>
+            <div className="w-3.5 h-3.5 rounded-full bg-purple-500" />
+            <span className="text-xs text-gray-600">
+              {t.peerReviewDemo.correction}
+            </span>
           </button>
         </div>
       </div>
 
       {/* Teacher Dashboard View */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 flex-1 relative overflow-hidden">
-        <div className="px-2 py-1 border-b border-gray-100 bg-gray-50">
-          <p className="text-[8px] font-semibold text-gray-600">
-            Teacher View: Peer Feedback At-a-Glance
+        <div className="px-3 py-2 border-b border-gray-100 bg-gray-50">
+          <p className="text-xs font-semibold text-gray-600">
+            {t.peerReviewDemo.teacherView}
           </p>
         </div>
 
         {/* Header */}
-        <div className="grid grid-cols-[1fr_50px_50px] gap-1 px-2 py-1 border-b border-gray-100 bg-gray-50/50">
-          <div className="text-[7px] font-semibold text-gray-500">Student</div>
-          <div className="text-[7px] font-semibold text-gray-500 text-center">
-            Received
+        <div className="grid grid-cols-[1fr_60px_60px] gap-1 px-3 py-1.5 border-b border-gray-100 bg-gray-50/50">
+          <div className="text-xs font-semibold text-gray-500">
+            {t.peerReviewDemo.student}
           </div>
-          <div className="text-[7px] font-semibold text-gray-500 text-center">
-            Given
+          <div className="text-xs font-semibold text-gray-500 text-center">
+            {t.peerReviewDemo.received}
+          </div>
+          <div className="text-xs font-semibold text-gray-500 text-center">
+            {t.peerReviewDemo.given}
           </div>
         </div>
 
@@ -108,55 +125,53 @@ export function PeerReviewDemo() {
             return (
               <div
                 key={idx}
-                className={`grid grid-cols-[1fr_50px_50px] gap-1 px-2 py-1.5 ${isHighlighted ? "bg-accent/5" : ""}`}
+                className={`grid grid-cols-[1fr_60px_60px] gap-1 px-3 py-2 ${isHighlighted ? "bg-accent/5" : ""}`}
               >
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
                   <div
-                    className={`w-4 h-4 rounded-full ${isHighlighted ? "bg-accent" : "bg-accent/20"} flex items-center justify-center`}
+                    className={`w-5 h-5 rounded-full ${isHighlighted ? "bg-accent" : "bg-accent/20"} flex items-center justify-center`}
                   >
                     <span
-                      className={`text-[6px] font-bold ${isHighlighted ? "text-white" : "text-accent"}`}
+                      className={`text-[9px] font-bold ${isHighlighted ? "text-white" : "text-accent"}`}
                     >
                       {student.name.charAt(0)}
                     </span>
                   </div>
                   <span
-                    className={`text-[8px] font-medium ${isHighlighted ? "text-accent" : "text-gray-700"}`}
+                    className={`text-xs font-medium ${isHighlighted ? "text-accent" : "text-gray-700"}`}
                   >
                     {student.name}
                   </span>
                 </div>
                 {/* Received column */}
-                <div className="flex items-center justify-center gap-0.5">
+                <div className="flex items-center justify-center gap-1">
                   {student.received.map((color, dotIdx) => (
                     <div
                       key={dotIdx}
-                      className={`w-2 h-2 rounded-full ${getDotColor(color)}`}
+                      className={`w-2.5 h-2.5 rounded-full ${getDotColor(color)}`}
                     />
                   ))}
-                  {/* Show Jordan's received feedback from user */}
                   {student.isJordan &&
                     jordanReceived.map((color, dotIdx) => (
                       <div
                         key={`jordan-received-${dotIdx}`}
-                        className={`w-2 h-2 rounded-full ${getDotColor(color)} animate-in fade-in zoom-in duration-300`}
+                        className={`w-2.5 h-2.5 rounded-full ${getDotColor(color)} animate-in fade-in zoom-in duration-300`}
                       />
                     ))}
                 </div>
                 {/* Given column */}
-                <div className="flex items-center justify-center gap-0.5">
+                <div className="flex items-center justify-center gap-1">
                   {student.given.map((color, dotIdx) => (
                     <div
                       key={dotIdx}
-                      className={`w-2 h-2 rounded-full ${getDotColor(color)}`}
+                      className={`w-2.5 h-2.5 rounded-full ${getDotColor(color)}`}
                     />
                   ))}
-                  {/* Show user's given feedback */}
                   {student.isUser &&
                     givenFeedback.map((color, dotIdx) => (
                       <div
                         key={`given-${dotIdx}`}
-                        className={`w-2 h-2 rounded-full ${getDotColor(color)} animate-in fade-in zoom-in duration-300`}
+                        className={`w-2.5 h-2.5 rounded-full ${getDotColor(color)} animate-in fade-in zoom-in duration-300`}
                       />
                     ))}
                 </div>
@@ -165,12 +180,11 @@ export function PeerReviewDemo() {
           })}
         </div>
 
-        {/* Animating dots - one to Jordan's Received, one to Your Given */}
+        {/* Animating dots */}
         {selectedColor && animating && (
           <>
-            {/* Dot flying to Jordan's Received column */}
             <div
-              className={`absolute w-3 h-3 rounded-full ${getDotColor(selectedColor)} shadow-lg`}
+              className={`absolute w-3.5 h-3.5 rounded-full ${getDotColor(selectedColor)} shadow-lg`}
               style={{
                 top: "10px",
                 left: "50%",
@@ -178,9 +192,8 @@ export function PeerReviewDemo() {
                 animation: "flyToJordan 0.8s ease-in-out forwards",
               }}
             />
-            {/* Dot flying to Your Given column */}
             <div
-              className={`absolute w-3 h-3 rounded-full ${getDotColor(selectedColor)} shadow-lg`}
+              className={`absolute w-3.5 h-3.5 rounded-full ${getDotColor(selectedColor)} shadow-lg`}
               style={{
                 top: "10px",
                 left: "50%",
@@ -191,7 +204,6 @@ export function PeerReviewDemo() {
           </>
         )}
 
-        {/* Inline keyframes */}
         <style jsx>{`
           @keyframes flyToJordan {
             0% {
@@ -224,11 +236,11 @@ export function PeerReviewDemo() {
         `}</style>
 
         {/* Helper text */}
-        <div className="absolute bottom-0.5 left-0 right-0 text-center">
-          <p className="text-[7px] text-gray-400">
+        <div className="absolute bottom-1 left-0 right-0 text-center">
+          <p className="text-xs text-gray-400">
             {givenFeedback.length >= 3
-              ? "Feedback complete!"
-              : "Click a button to leave feedback"}
+              ? t.peerReviewDemo.feedbackComplete
+              : t.peerReviewDemo.clickToLeaveFeedback}
           </p>
         </div>
       </div>

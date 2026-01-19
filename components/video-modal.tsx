@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 interface VideoModalProps {
   buttonClassName?: string;
 }
 
 export function VideoModalButton({ buttonClassName }: VideoModalProps) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,7 +23,7 @@ export function VideoModalButton({ buttonClassName }: VideoModalProps) {
         }
         onClick={() => setIsOpen(true)}
       >
-        Watch Demo Video
+        {t.hero.watchDemo}
       </Button>
 
       {/* Video Modal */}
@@ -42,37 +44,14 @@ export function VideoModalButton({ buttonClassName }: VideoModalProps) {
               <X className="w-6 h-6 text-white" />
             </button>
 
-            {/* Placeholder for YouTube video */}
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center">
-                  <svg
-                    className="w-10 h-10 text-white ml-1"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-white text-xl font-semibold mb-2">
-                  Demo Video
-                </p>
-                <p className="text-white/60 text-sm">
-                  YouTube video placeholder
-                </p>
-                {/*
-                  Replace the placeholder above with:
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1"
-                    title="Floop Demo Video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                */}
-              </div>
-            </div>
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/I27YrRaxxOg?autoplay=1"
+              title="Floop Demo Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
       )}

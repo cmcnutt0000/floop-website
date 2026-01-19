@@ -144,3 +144,9 @@
         @apply text-foreground bg-transparent;
     }
 }
+
+/* Dyslexic-friendly font mode */
+body.dyslexic-font,
+body.dyslexic-font * {
+    font-family: "Open-Dyslexic", "OpenDyslexic", sans-serif !important;
+}

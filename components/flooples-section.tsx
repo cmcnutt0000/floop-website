@@ -3,100 +3,150 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useRive } from "@rive-app/react-canvas";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 interface Floople {
   id: string;
   color: string;
   bgColor: string;
   borderColor: string;
-  name: string;
-  description: string;
+  nameKey: keyof typeof floopleTranslationKeys;
+  descKey: keyof typeof floopleTranslationKeys;
   emoji: string;
   iconImage?: string;
   riveFile?: string;
+  stateMachine?: string;
 }
 
-const flooples: Floople[] = [
+// Map floople IDs to translation keys
+const floopleTranslationKeys = {
+  great: "great",
+  greatDesc: "greatDesc",
+  needsImprovement: "needsImprovement",
+  needsImprovementDesc: "needsImprovementDesc",
+  confused: "confused",
+  confusedDesc: "confusedDesc",
+  curious: "curious",
+  curiousDesc: "curiousDesc",
+  loveIt: "loveIt",
+  loveItDesc: "loveItDesc",
+  funny: "funny",
+  funnyDesc: "funnyDesc",
+  creative: "creative",
+  creativeDesc: "creativeDesc",
+  almostThere: "almostThere",
+  almostThereDesc: "almostThereDesc",
+} as const;
+
+const floopleData: Floople[] = [
   {
     id: "great",
-    color: "text-pink-600",
-    bgColor: "bg-pink-100",
-    borderColor: "border-pink-300",
-    name: "Great!",
-    description: "Celebrate excellent work and highlight what's working well",
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-100",
+    borderColor: "border-emerald-300",
+    nameKey: "great",
+    descKey: "greatDesc",
     emoji: "stars",
-    iconImage: "/images/great.png",
+    iconImage: "/images/great.svg",
     riveFile: "/images/rive/great.riv",
+    stateMachine: "animation",
   },
   {
     id: "improvement",
     color: "text-amber-600",
     bgColor: "bg-amber-100",
     borderColor: "border-amber-300",
-    name: "Needs Improvement",
-    description: "Gently suggest areas where the work could be stronger",
+    nameKey: "needsImprovement",
+    descKey: "needsImprovementDesc",
     emoji: "pencil",
+    iconImage: "/images/NeedsImprovement.svg",
+    riveFile: "/images/rive/needsimprovement.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "confused",
     color: "text-purple-600",
     bgColor: "bg-purple-100",
     borderColor: "border-purple-300",
-    name: "Not Sure / Confused",
-    description: "Flag parts that are unclear or need more explanation",
+    nameKey: "confused",
+    descKey: "confusedDesc",
     emoji: "question",
+    iconImage: "/images/Confused.svg",
+    riveFile: "/images/rive/confused.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "curious",
-    color: "text-blue-600",
-    bgColor: "bg-blue-100",
-    borderColor: "border-blue-300",
-    name: "Curious",
-    description: "I want to know more about this idea",
+    color: "text-pink-600",
+    bgColor: "bg-pink-100",
+    borderColor: "border-pink-300",
+    nameKey: "curious",
+    descKey: "curiousDesc",
     emoji: "curious",
+    iconImage: "/images/Curious.svg",
+    riveFile: "/images/rive/curious.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "love",
     color: "text-rose-600",
     bgColor: "bg-rose-100",
     borderColor: "border-rose-300",
-    name: "Love It!",
-    description: "Show enthusiasm for creative or exceptional moments",
+    nameKey: "loveIt",
+    descKey: "loveItDesc",
     emoji: "heart",
+    iconImage: "/images/Love.svg",
+    riveFile: "/images/rive/love.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "funny",
     color: "text-orange-600",
     bgColor: "bg-orange-100",
     borderColor: "border-orange-300",
-    name: "Funny",
-    description: "Acknowledge humor and keep feedback lighthearted",
+    nameKey: "funny",
+    descKey: "funnyDesc",
     emoji: "laugh",
+    iconImage: "/images/Laughing.svg",
+    riveFile: "/images/rive/laughing.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "creative",
-    color: "text-red-600",
-    bgColor: "bg-red-100",
-    borderColor: "border-red-300",
-    name: "Creative!",
-    description: "Original or innovative thinking here",
+    color: "text-teal-600",
+    bgColor: "bg-teal-100",
+    borderColor: "border-teal-300",
+    nameKey: "creative",
+    descKey: "creativeDesc",
     emoji: "creative",
+    iconImage: "/images/Creative.svg",
+    riveFile: "/images/rive/Creative.riv",
+    stateMachine: "State Machine 1",
   },
   {
     id: "almost",
-    color: "text-cyan-600",
-    bgColor: "bg-cyan-100",
-    borderColor: "border-cyan-300",
-    name: "Almost There",
-    description: "Encourage students who are close to getting it right",
+    color: "text-blue-600",
+    bgColor: "bg-blue-100",
+    borderColor: "border-blue-300",
+    nameKey: "almostThere",
+    descKey: "almostThereDesc",
     emoji: "target",
+    iconImage: "/images/Close.svg",
+    riveFile: "/images/rive/Close.riv",
+    stateMachine: "State Machine 1",
   },
 ];
 
-function RiveAnimation({ src }: { src: string }) {
+function RiveAnimation({
+  src,
+  stateMachine = "animation",
+}: {
+  src: string;
+  stateMachine?: string;
+}) {
   const { RiveComponent } = useRive({
     src,
-    stateMachines: "animation",
+    stateMachines: stateMachine,
     autoplay: true,
   });
 
@@ -109,9 +159,11 @@ function RiveAnimation({ src }: { src: string }) {
 
 function FloopleIcon({
   floople,
+  name,
   size = "large",
 }: {
   floople: Floople;
+  name: string;
   size?: "small" | "large";
 }) {
   const sizeClasses = size === "large" ? "w-24 h-24" : "w-12 h-12";
@@ -148,7 +200,7 @@ function FloopleIcon({
       {floople.iconImage ? (
         <Image
           src={floople.iconImage}
-          alt={floople.name}
+          alt={name}
           width={imgSize}
           height={imgSize}
           className="object-contain"
@@ -161,7 +213,19 @@ function FloopleIcon({
 }
 
 export function FlooplesSection() {
-  const [selectedFloople, setSelectedFloople] = useState<Floople>(flooples[0]);
+  const { t } = useLanguage();
+  const [selectedFloople, setSelectedFloople] = useState<Floople>(
+    floopleData[0],
+  );
+
+  // Helper to get translated name/description
+  const getFloopleName = (floople: Floople) => {
+    return t.flooples[floople.nameKey as keyof typeof t.flooples] as string;
+  };
+
+  const getFloopleDesc = (floople: Floople) => {
+    return t.flooples[floople.descKey as keyof typeof t.flooples] as string;
+  };
 
   return (
     <section className="py-24 lg:py-32">
@@ -170,29 +234,30 @@ export function FlooplesSection() {
           {/* Left: Title, Description, and Selector */}
           <div className="text-center">
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Meet Our Flooples
+              {t.flooples.title}
             </h2>
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Flooples are friendly feedback companions that communicate
-              different ideas and types of feedback. They make giving feedback
-              fun, easy-going, and help students improve their work without
-              feeling overwhelmed.
+              {t.flooples.subtitle}
             </p>
 
             {/* Floople Selector Grid */}
             <div className="bg-white rounded-2xl p-4 lg:p-6 shadow-sm border border-border">
               <div className="grid grid-cols-4 gap-2 lg:gap-3">
-                {flooples.map((floople) => (
+                {floopleData.map((floople) => (
                   <button
                     key={floople.id}
                     onClick={() => setSelectedFloople(floople)}
-                    className={`p-2 lg:p-3 rounded-xl border-2 transition-all duration-200 flex flex-col items-center justify-center ${
+                    className={`p-2 lg:p-3 rounded-xl border-2 transition-all duration-200 flex flex-col items-center justify-center cursor-pointer h-[88px] lg:h-[100px] ${
                       selectedFloople.id === floople.id
                         ? `${floople.bgColor} ${floople.borderColor} scale-105 shadow-md`
                         : "bg-gray-50 border-gray-200 hover:border-gray-300 hover:bg-gray-100"
                     }`}
                   >
-                    <FloopleIcon floople={floople} size="small" />
+                    <FloopleIcon
+                      floople={floople}
+                      name={getFloopleName(floople)}
+                      size="small"
+                    />
                     <p
                       className={`text-[10px] lg:text-xs font-medium mt-1 ${
                         selectedFloople.id === floople.id
@@ -200,7 +265,7 @@ export function FlooplesSection() {
                           : "text-gray-600"
                       }`}
                     >
-                      {floople.name}
+                      {getFloopleName(floople)}
                     </p>
                   </button>
                 ))}
@@ -214,7 +279,11 @@ export function FlooplesSection() {
               className={`w-40 h-40 lg:w-56 lg:h-56 ${selectedFloople.bgColor} ${selectedFloople.borderColor} border-4 rounded-3xl flex items-center justify-center shadow-lg mb-6 transition-all duration-300 overflow-hidden`}
             >
               {selectedFloople.riveFile ? (
-                <RiveAnimation src={selectedFloople.riveFile} />
+                <RiveAnimation
+                  key={selectedFloople.id}
+                  src={selectedFloople.riveFile}
+                  stateMachine={selectedFloople.stateMachine}
+                />
               ) : (
                 <span className="text-6xl lg:text-8xl">
                   {getEmojiForFloople(selectedFloople.emoji)}
@@ -225,10 +294,10 @@ export function FlooplesSection() {
               className={`text-center px-8 py-4 rounded-xl ${selectedFloople.bgColor} ${selectedFloople.borderColor} border-2 max-w-sm`}
             >
               <p className={`font-bold ${selectedFloople.color} text-2xl mb-2`}>
-                {selectedFloople.name}
+                {getFloopleName(selectedFloople)}
               </p>
               <p className="text-muted-foreground">
-                {selectedFloople.description}
+                {getFloopleDesc(selectedFloople)}
               </p>
             </div>
           </div>
