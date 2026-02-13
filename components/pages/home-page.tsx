@@ -36,6 +36,18 @@ export default function HomePage() {
       />
       <Header />
 
+      {/* Floop 2.0 Launch Banner */}
+      <div className="bg-yellow-300 text-yellow-900">
+        <div className="container mx-auto px-6 lg:px-8 max-w-[1400px] py-3 text-center text-sm sm:text-base font-medium">
+          <span className="font-bold">{t.banner.launching}</span>{" "}
+          {t.banner.withFeatures}{" "}
+          <LocalizedLink href="/pricing" className="underline font-bold hover:text-yellow-950 transition-colors">
+            {t.banner.signUpLink}
+          </LocalizedLink>{" "}
+          {t.banner.forFloop1}
+        </div>
+      </div>
+
       <section id="hero" className="py-12 lg:py-16">
         <div className="container mx-auto px-6 lg:px-8 max-w-[1400px]">
           {/* Hero: Side-by-side layout */}

@@ -10,6 +10,13 @@ export const translations = {
       switchToDefaultFont: "Switch to default font",
       switchToDyslexicFont: "Switch to dyslexic-friendly font",
     },
+    // Launch banner
+    banner: {
+      launching: "Floop 2.0 is launching soon",
+      withFeatures: "with activities, Flooples, and more. Preview it below and",
+      signUpLink: "sign up for a free account",
+      forFloop1: "for Floop 1.0 today!",
+    },
     // Hero section
     hero: {
       pronunciation: "/flo\u035eop/",
@@ -358,6 +365,13 @@ export const translations = {
       switchToDefaultFont: "Cambiar a fuente predeterminada",
       switchToDyslexicFont: "Cambiar a fuente para dislexia",
     },
+    // Launch banner
+    banner: {
+      launching: "Floop 2.0 se lanza pronto",
+      withFeatures: "con actividades, Flooples y mas. Previsualizalo a continuacion y",
+      signUpLink: "registrate gratis",
+      forFloop1: "en Floop 1.0 hoy!",
+    },
     // Hero section
     hero: {
       pronunciation: "/flo\u035eop/",
@@ -694,6 +708,13 @@ export const translations = {
       toggleDyslexicFont: "Basculer la police pour dyslexie",
       switchToDefaultFont: "Passer a la police par defaut",
       switchToDyslexicFont: "Passer a la police pour dyslexie",
+    },
+    // Launch banner
+    banner: {
+      launching: "Floop 2.0 arrive bientot",
+      withFeatures: "avec des activites, des Flooples et plus encore. Decouvrez-le ci-dessous et",
+      signUpLink: "inscrivez-vous gratuitement",
+      forFloop1: "a Floop 1.0 aujourd'hui !",
     },
     // Hero section
     hero: {
