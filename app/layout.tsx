@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   title: "Floop - Meaningful Feedback, Faster",
   description:
     "Floop helps teachers deliver feedback 4x faster while empowering students through guided peer feedback and self-assessment. Used by 90% of U.S. schools.",
-  generator: "v0.app",
   keywords: [
     "edtech",
     "feedback",
