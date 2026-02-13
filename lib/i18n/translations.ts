@@ -23,13 +23,32 @@ export const translations = {
       partOfSpeech: "noun (or verb!)",
       shortFor: "Short for",
       feedback: "F",
-      loop: "eedback Loop",
+      loopMiddle: "eedback ",
+      loopHighlight: "Loop",
+      loopTranslation: "",
       definition:
         "A continuous cycle where feedback drives improvement and growth.",
       tagline:
         "Drag and drop feedback directly onto student work. Students continue to grow and learn. Teachers save hours.",
       signUpFree: "Sign up for free",
       watchDemo: "Watch Demo Video",
+    },
+    // Mobile summaries (shown instead of interactive demos on small screens)
+    mobileSummary: {
+      heroDescription:
+        "Drag and drop feedback directly onto essays, images, videos, and more. Save time with reusable comment banks and see when students read your feedback.",
+      heroFeature1: "Works on essays, images, videos, and audio",
+      heroFeature2: "Reusable comment banks for faster grading",
+      heroFeature3: "Track when students open and read feedback",
+      tryOnDesktop: "Try the interactive demo on desktop",
+      teacherSummary:
+        "Write feedback and drag it directly onto student work. Students can reply to start a conversation about their learning.",
+      peerSummary:
+        "Students give each other structured feedback using guided prompts. Teachers see all peer feedback at a glance.",
+      selfSummary:
+        "Students reflect on their own work before submitting. Teachers see where students feel confident and where they need help.",
+      activitySummary:
+        "Run feedback activities where the whole class practices giving constructive, honest feedback on creative work.",
     },
     // Feedback demo
     feedbackDemo: {
@@ -378,13 +397,32 @@ export const translations = {
       partOfSpeech: "sustantivo (\u00a1o verbo!)",
       shortFor: "Abreviatura de",
       feedback: "F",
-      loop: "eedback Loop (Ciclo de Retroalimentacion)",
+      loopMiddle: "eedback ",
+      loopHighlight: "Loop",
+      loopTranslation: " (Ciclo de Retroalimentacion)",
       definition:
         "Un ciclo continuo donde la retroalimentacion impulsa la mejora y el crecimiento.",
       tagline:
         "Arrastra y suelta comentarios directamente en el trabajo del estudiante. Los estudiantes continuan creciendo y aprendiendo. Los profesores ahorran horas.",
       signUpFree: "Registrate gratis",
       watchDemo: "Ver Video Demo",
+    },
+    // Mobile summaries
+    mobileSummary: {
+      heroDescription:
+        "Arrastra y suelta comentarios directamente en ensayos, imagenes, videos y mas. Ahorra tiempo con bancos de comentarios reutilizables y ve cuando los estudiantes leen tus comentarios.",
+      heroFeature1: "Funciona en ensayos, imagenes, videos y audio",
+      heroFeature2: "Bancos de comentarios reutilizables para calificar mas rapido",
+      heroFeature3: "Rastrea cuando los estudiantes abren y leen los comentarios",
+      tryOnDesktop: "Prueba la demo interactiva en escritorio",
+      teacherSummary:
+        "Escribe comentarios y arrastralos directamente al trabajo del estudiante. Los estudiantes pueden responder para iniciar una conversacion sobre su aprendizaje.",
+      peerSummary:
+        "Los estudiantes se dan retroalimentacion estructurada entre si usando indicaciones guiadas. Los profesores ven toda la retroalimentacion de un vistazo.",
+      selfSummary:
+        "Los estudiantes reflexionan sobre su propio trabajo antes de enviarlo. Los profesores ven donde se sienten seguros y donde necesitan ayuda.",
+      activitySummary:
+        "Realiza actividades donde toda la clase practica dar retroalimentacion constructiva y honesta sobre trabajo creativo.",
     },
     // Feedback demo
     feedbackDemo: {
@@ -722,13 +760,32 @@ export const translations = {
       partOfSpeech: "nom (ou verbe !)",
       shortFor: "Abreviation de",
       feedback: "F",
-      loop: "eedback Loop (Boucle de Retroaction)",
+      loopMiddle: "eedback ",
+      loopHighlight: "Loop",
+      loopTranslation: " (Boucle de Retroaction)",
       definition:
         "Un cycle continu ou la retroaction stimule l'amelioration et la croissance.",
       tagline:
         "Glissez et deposez des commentaires directement sur le travail de l'eleve. Les eleves continuent de grandir et d'apprendre. Les enseignants gagnent des heures.",
       signUpFree: "S'inscrire gratuitement",
       watchDemo: "Voir la Video Demo",
+    },
+    // Mobile summaries
+    mobileSummary: {
+      heroDescription:
+        "Glissez et deposez des commentaires directement sur les essais, images, videos et plus. Gagnez du temps avec des banques de commentaires reutilisables et voyez quand les eleves lisent vos commentaires.",
+      heroFeature1: "Fonctionne sur les essais, images, videos et audio",
+      heroFeature2: "Banques de commentaires reutilisables pour corriger plus vite",
+      heroFeature3: "Suivez quand les eleves ouvrent et lisent les commentaires",
+      tryOnDesktop: "Essayez la demo interactive sur ordinateur",
+      teacherSummary:
+        "Ecrivez des commentaires et glissez-les directement sur le travail de l'eleve. Les eleves peuvent repondre pour entamer une conversation sur leur apprentissage.",
+      peerSummary:
+        "Les eleves se donnent mutuellement des commentaires structures a l'aide d'invites guidees. Les enseignants voient tous les commentaires des pairs en un coup d'oeil.",
+      selfSummary:
+        "Les eleves reflechissent a leur propre travail avant de le soumettre. Les enseignants voient ou les eleves se sentent confiants et ou ils ont besoin d'aide.",
+      activitySummary:
+        "Organisez des activites ou toute la classe pratique la retroaction constructive et honnete sur des travaux creatifs.",
     },
     // Feedback demo
     feedbackDemo: {

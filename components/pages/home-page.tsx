@@ -66,7 +66,9 @@ export default function HomePage() {
               <p className="text-lg lg:text-xl text-muted-foreground mb-4">
                 {t.hero.shortFor}{" "}
                 <span className="font-bold text-accent">{t.hero.feedback}</span>
-                {t.hero.loop}
+                {t.hero.loopMiddle}
+                <span className="font-bold text-accent">{t.hero.loopHighlight}</span>
+                {t.hero.loopTranslation}
               </p>
               <p className="text-lg text-muted-foreground">
                 {t.hero.definition}
@@ -92,9 +94,39 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Interactive Demo Section - directly below hero */}
-          <div className="max-w-6xl mx-auto">
+          {/* Interactive Demo - desktop only */}
+          <div className="max-w-6xl mx-auto hidden lg:block">
             <FeedbackDemo />
+          </div>
+
+          {/* Mobile summary - replaces interactive demo on small screens */}
+          <div className="lg:hidden">
+            <Card className="p-6 border-2 border-accent/30 bg-card">
+              <h3 className="text-lg font-bold text-foreground mb-3">
+                {t.feedbackDemo.tryItYourself}{" "}
+                <span className="text-accent">{t.feedbackDemo.essay}, {t.feedbackDemo.image}, {t.feedbackDemo.video}</span>
+              </h3>
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                {t.mobileSummary.heroDescription}
+              </p>
+              <ul className="space-y-2 mb-4">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">{t.mobileSummary.heroFeature1}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">{t.mobileSummary.heroFeature2}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span className="text-sm">{t.mobileSummary.heroFeature3}</span>
+                </li>
+              </ul>
+              <p className="text-xs text-muted-foreground/70 italic">
+                {t.mobileSummary.tryOnDesktop}
+              </p>
+            </Card>
           </div>
         </div>
       </section>
@@ -108,7 +140,7 @@ export default function HomePage() {
             <p className="text-xl lg:text-2xl text-muted-foreground text-pretty leading-relaxed">
               {t.fourWays.subtitle}
             </p>
-            <div className="mt-4 p-4 bg-purple-100 border border-accent/20 rounded-xl">
+            <div className="mt-4 p-4 bg-purple-100 border border-accent/20 rounded-xl hidden lg:block">
               <p className="text-sm text-foreground">
                 <span className="font-semibold">{t.fourWays.tryIt}</span>{" "}
                 <span className="text-muted-foreground">
@@ -121,8 +153,13 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-6">
             {/* Teacher to Student Card */}
             <Card className="group p-0 border-2 hover:border-accent transition-all duration-300 overflow-hidden bg-card">
-              <div className="aspect-[4/3] border-b border-border">
+              <div className="aspect-[4/3] border-b border-border hidden lg:block">
                 <StudentResponseDemo />
+              </div>
+              <div className="p-6 lg:hidden border-b border-border bg-accent/5">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.mobileSummary.teacherSummary}
+                </p>
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-3">
@@ -164,8 +201,13 @@ export default function HomePage() {
 
             {/* Peer to Peer Card */}
             <Card className="group p-0 border-2 hover:border-accent transition-all duration-300 overflow-hidden bg-card">
-              <div className="aspect-[4/3] border-b border-border">
+              <div className="aspect-[4/3] border-b border-border hidden lg:block">
                 <PeerReviewDemo />
+              </div>
+              <div className="p-6 lg:hidden border-b border-border bg-accent/5">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.mobileSummary.peerSummary}
+                </p>
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-3">
@@ -201,8 +243,13 @@ export default function HomePage() {
 
             {/* Self-Assessment Card */}
             <Card className="group p-0 border-2 hover:border-accent transition-all duration-300 overflow-hidden bg-card">
-              <div className="aspect-[4/3] border-b border-border">
+              <div className="aspect-[4/3] border-b border-border hidden lg:block">
                 <SelfAssessmentDemo />
+              </div>
+              <div className="p-6 lg:hidden border-b border-border bg-accent/5">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.mobileSummary.selfSummary}
+                </p>
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-3">
@@ -238,8 +285,13 @@ export default function HomePage() {
 
             {/* Activity-Based Card */}
             <Card className="group p-0 border-2 hover:border-accent transition-all duration-300 overflow-hidden bg-card">
-              <div className="aspect-[4/3] border-b border-border">
+              <div className="aspect-[4/3] border-b border-border hidden lg:block">
                 <ActivityDemo />
+              </div>
+              <div className="p-6 lg:hidden border-b border-border bg-accent/5">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.mobileSummary.activitySummary}
+                </p>
               </div>
               <div className="p-8">
                 <div className="flex items-center gap-3 mb-3">
