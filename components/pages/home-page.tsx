@@ -41,9 +41,9 @@ export default function HomePage() {
         <div className="container mx-auto px-6 lg:px-8 max-w-[1400px] py-3 text-center text-sm sm:text-base font-medium">
           <span className="font-bold">{t.banner.launching}</span>{" "}
           {t.banner.withFeatures}{" "}
-          <LocalizedLink href="/pricing" className="underline font-bold hover:text-yellow-950 transition-colors">
+          <a href="https://app.floopedu.com/signIn" className="underline font-bold hover:text-yellow-950 transition-colors">
             {t.banner.signUpLink}
-          </LocalizedLink>{" "}
+          </a>{" "}
           {t.banner.forFloop1}
         </div>
       </div>
@@ -79,14 +79,14 @@ export default function HomePage() {
                 {t.hero.tagline}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <LocalizedLink href="/pricing">
+                <a href="https://app.floopedu.com/signIn">
                   <Button
                     size="lg"
                     className="bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-10 py-7 font-semibold"
                   >
                     {t.hero.signUpFree}
                   </Button>
-                </LocalizedLink>
+                </a>
                 <VideoModalButton />
               </div>
             </div>
@@ -865,14 +865,14 @@ export default function HomePage() {
             {t.cta.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <LocalizedLink href="/pricing">
+            <a href="https://app.floopedu.com/signIn">
               <Button
                 size="lg"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-10 py-7 font-semibold"
               >
                 {t.hero.signUpFree}
               </Button>
-            </LocalizedLink>
+            </a>
             <VideoModalButton buttonClassName="text-lg px-10 py-7 font-semibold border-2 border-white/30 bg-transparent text-white hover:bg-accent/30 hover:border-accent" />
           </div>
         </div>
@@ -902,12 +902,12 @@ export default function HomePage() {
               {t.footer.nonprofit}
             </p>
             <div className="flex items-center gap-6">
-              <LocalizedLink
-                href="/pricing"
+              <a
+                href="https://app.floopedu.com/signIn"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {t.header.pricing}
-              </LocalizedLink>
+              </a>
               <LocalizedLink
                 href="/terms"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"

@@ -37,21 +37,21 @@ export function Header({ showLogo = false }: HeaderProps) {
           </LocalizedLink>
         )}
         <div className="flex items-center gap-3">
-          <LocalizedLink href="/pricing">
+          <a href="https://app.floopedu.com/signIn">
             <Button variant="ghost" className="text-foreground font-semibold">
               {t.header.pricing}
             </Button>
-          </LocalizedLink>
+          </a>
           <a href="https://app.floopedu.com/signIn">
             <Button variant="ghost" className="text-foreground font-semibold">
               {t.header.logIn}
             </Button>
           </a>
-          <LocalizedLink href="/pricing">
+          <a href="https://app.floopedu.com/signIn">
             <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               {t.header.signUp}
             </Button>
-          </LocalizedLink>
+          </a>
           <Button
             variant="ghost"
             size="icon"
