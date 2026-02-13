@@ -48,12 +48,12 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section id="hero" className="py-12 lg:py-16">
-        <div className="container mx-auto px-6 lg:px-8 max-w-[1400px]">
+      <section id="hero" className="py-8 lg:py-16">
+        <div className="container mx-auto px-6 lg:px-8 max-w-[1400px] overflow-hidden">
           {/* Hero: Side-by-side layout */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-10">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-10">
             {/* Left: Dictionary Definition */}
-            <div>
+            <div className="min-w-0">
               <div className="mb-4">
                 <RiveLogo />
               </div>
@@ -75,9 +75,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right: CTA and Description */}
-            <div className="lg:pl-8">
-              <p className="text-xl lg:text-2xl text-muted-foreground mb-6 leading-relaxed">
+             {/* Right: CTA and Description */}
+            <div className="lg:pl-8 min-w-0">
+              <p className="text-lg lg:text-2xl text-muted-foreground mb-6 leading-relaxed">
                 {t.hero.tagline}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">

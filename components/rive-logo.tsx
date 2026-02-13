@@ -10,7 +10,7 @@ export function RiveLogo() {
   });
 
   return (
-    <div className="h-44 lg:h-56 xl:h-72 w-[500px] lg:w-[550px] xl:w-[600px] max-w-full">
+    <div className="h-32 sm:h-44 lg:h-56 xl:h-72 w-full sm:w-[500px] lg:w-[550px] xl:w-[600px] max-w-full">
       <RiveComponent style={{ width: "100%", height: "100%" }} />
     </div>
   );
